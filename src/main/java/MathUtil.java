@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MathUtil {
 
     static public int mdc(int a, int b) {
@@ -18,12 +20,21 @@ public class MathUtil {
             return Math.abs(a);
         }
 
-        if(a % b != 0)
-        {
-            return 1;
-        }
 
-        return -1;
+
+
+        return mdc(a - b, b);
     }
+    public static int mdc(int ...valores){
+        Objects.requireNonNull(valores, "O parametro não pode ser nullo");
 
+        if(valores.length == 0){
+            throw new IllegalArgumentException("É PRECISO INDICAR PELO MENOS 1 VALOR");
+        }
+        int a = valores[0];
+        for (int b: valores){
+            a = mdc(a,b);
+        }
+        return a;
+    }
 }
